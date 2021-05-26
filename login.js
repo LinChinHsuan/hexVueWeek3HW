@@ -16,9 +16,9 @@ const app = {
                 .then(res=>{
                     console.log(res);
                     if(res.data.success){
-                        const token = res.data.token;
-                        const expired = res.data.expired;
+                        const [ token , expired ] = [ res.data.token , res.data.expired ];
                         document.cookie = `hexToken=${token}; expires=${new Date(expired)}`;
+                        window.location.href = 'index.html';
                     }
                 })
                 .catch(err=>{

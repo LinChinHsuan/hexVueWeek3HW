@@ -1,24 +1,25 @@
 const url = "https://vue3-course-api.hexschool.io/"
 const path = "linvueportfolio";
+const productSample = {
+        "category": "",
+        "content": "",
+        "description": "",
+        "id": "",
+        "is_enabled": 1,
+        "origin_price": 0,
+        "price": 0,
+        "title": "",
+        "unit": "個",
+        "num": 0,
+        "imageUrl": "",
+        "imagesUrl": []
+    };
 const app = {
     data() {
         return {
             products: [],
             editingProduct: {
-                data: {
-                    "category": "",
-                    "content": "",
-                    "description": "",
-                    "id": "",
-                    "is_enabled": 1,
-                    "origin_price": 0,
-                    "price": 0,
-                    "title": "",
-                    "unit": "個",
-                    "num": 0,
-                    "imageUrl": "",
-                    "imagesUrl": []
-                }
+                data: { ...productSample }
             }
         }
     },
@@ -72,38 +73,12 @@ const app = {
                     })
             }
             this.editingProduct = {
-                data: {
-                    "category": "",
-                    "content": "",
-                    "description": "",
-                    "id": "",
-                    "is_enabled": 1,
-                    "origin_price": 0,
-                    "price": 0,
-                    "title": "",
-                    "unit": "個",
-                    "num": 0,
-                    "imageUrl": "",
-                    "imagesUrl": []
-                }
+                data: {...productSample}
             }
         },
         cancelEdit() {
             this.editingProduct = {
-                data: {
-                    "category": "",
-                    "content": "",
-                    "description": "",
-                    "id": "",
-                    "is_enabled": 1,
-                    "origin_price": 0,
-                    "price": 0,
-                    "title": "",
-                    "unit": "個",
-                    "num": 0,
-                    "imageUrl": "",
-                    "imagesUrl": []
-                }
+                data: {...productSample}
             };
         },
         delProduct(id) {
@@ -126,10 +101,8 @@ const app = {
             axios.defaults.headers.common['Authorization'] = token;
             axios.post(`${url}api/user/check`)
                 .then(res => {
-                    // console.log(res);
-                    if (res.data.success) {
-                        // window.location.href = 'index.html';
-                    } else {
+                    console.log(res);
+                    if (!res.data.success) {
                         window.location.href = 'login.html';
                     }
                 })
